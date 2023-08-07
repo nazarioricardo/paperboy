@@ -70,3 +70,17 @@ export const register = async (req: Request, res: Response) => {
     return res.status(500).json({ errors: error });
   }
 };
+
+export const profile = async (req: Request, res: Response) => {
+  const { id } = req.body.user;
+  try {
+    const userObj = await User.findOne({ _id: id });
+    if (!userObj) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    return res.status(200).json({ user: userObj });
+  } catch (error) {
+    return res.status(500).json({ errors: error });
+  }
+};
