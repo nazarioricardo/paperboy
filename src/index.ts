@@ -2,10 +2,12 @@ import express from "express";
 import mongoose from "mongoose";
 import { json } from "body-parser";
 import { todoRouter } from "./routes/todo";
+import { userRouter } from "./routes/user";
 
 const app = express();
 app.use(json());
 app.use(todoRouter);
+app.use(userRouter);
 
 try {
   mongoose.connect(

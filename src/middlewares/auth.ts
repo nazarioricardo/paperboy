@@ -13,6 +13,7 @@ export const authorize = async (
 
   try {
     const decoded = await jwt.verify(token, "Glorfindel");
+    console.log(decoded);
     req.body.user = decoded;
     next();
   } catch (error) {
@@ -20,7 +21,7 @@ export const authorize = async (
   }
 };
 
-const adminAuthorize = async (
+export const adminAuthorize = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -36,5 +37,3 @@ const adminAuthorize = async (
     return res.status(401).json({ message: "Unauthorized" });
   }
 };
-
-export default authorize;

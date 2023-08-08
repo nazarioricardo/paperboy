@@ -7,4 +7,4 @@ router.get("/api/users", authorize, profile);
 router.post("/api/users/register", register);
 router.post("/api/users/login", login);
 
-export default router;
+export { router as userRouter };
