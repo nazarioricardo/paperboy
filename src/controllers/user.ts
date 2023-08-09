@@ -29,7 +29,7 @@ export const login = async (req: Request, res: Response) => {
 
       const token = await jwt.sign(
         {
-          user_id: user._id,
+          id: user._id,
           email,
         },
         "Glorfindel"
@@ -72,9 +72,9 @@ export const register = async (req: Request, res: Response) => {
 };
 
 export const profile = async (req: Request, res: Response) => {
-  const { user_id } = req.body.user;
+  const { id } = req.body.user;
   try {
-    const userObj = await User.findOne({ _id: user_id });
+    const userObj = await User.findOne({ _id: id });
     if (!userObj) {
       return res.status(404).json({ message: "User not found" });
     }

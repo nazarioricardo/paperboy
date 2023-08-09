@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-export const authorize = async (
+export const jwtAuth = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ message: "UnjwtAuthd" });
   }
 
   try {
@@ -16,11 +16,12 @@ export const authorize = async (
     req.body.user = decoded;
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Unauthorized" });
+    console.log("error");
+    return res.status(401).json({ message: "UnjwtAuthd" });
   }
 };
 
-export const adminAuthorize = async (
+export const adminjwtAuth = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -30,9 +31,9 @@ export const adminAuthorize = async (
     if (user.role === "admin") {
       next();
     } else {
-      return res.status(401).json({ message: "Unauthorized" });
+      return res.status(401).json({ message: "UnjwtAuthd" });
     }
   } catch (error) {
-    return res.status(401).json({ message: "Unauthorized" });
+    return res.status(401).json({ message: "UnjwtAuthd" });
   }
 };

@@ -1,13 +1,25 @@
 import express from "express";
 import mongoose from "mongoose";
 import { json } from "body-parser";
+import cors from "cors";
+import hbs from "hbs";
+import path from "path";
 import { todoRouter } from "./routes/todo";
 import { userRouter } from "./routes/user";
+import { viewRouter } from "./routes/view";
+
+const PORT = 8080;
 
 const app = express();
+app.use(cors());
 app.use(json());
+app.set("view engine", "hbs");
+app.set("views", __dirname + "/views");
 app.use(todoRouter);
 app.use(userRouter);
+app.use(viewRouter);
+
+hbs.registerPartials(path.join(__dirname, "views/partials"));
 
 try {
   mongoose.connect(
@@ -25,6 +37,6 @@ try {
   console.log(error);
 }
 
-app.listen(3000, () => {
-  console.log("server is listening on port 3000");
+app.listen(PORT, () => {
+  console.log("server is listening on port " + PORT);
 });
