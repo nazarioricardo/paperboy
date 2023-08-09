@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 import User from "../models/user";
-import { IUser, IUserLogin } from "../types";
+import { IUser, IUserLogin } from "../utils/types";
 
 /**
  * @param {Request} req
@@ -37,7 +37,7 @@ export const login = async (req: Request, res: Response) => {
 
       return res.status(200).json({
         token,
-        user: { user_name: user.user_name, role: user.role },
+        user: { username: user.username, role: user.role },
       });
     });
   } catch (error) {
@@ -50,7 +50,7 @@ export const login = async (req: Request, res: Response) => {
  * @param {Response} res
  */
 export const register = async (req: Request, res: Response) => {
-  const { user_name, email, password, role }: IUser = req.body;
+  const { username, email, password, role }: IUser = req.body;
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -58,7 +58,7 @@ export const register = async (req: Request, res: Response) => {
     }
 
     const userObj = new User({
-      user_name,
+      username,
       email,
       password,
       role,

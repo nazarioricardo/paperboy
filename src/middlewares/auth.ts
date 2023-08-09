@@ -13,7 +13,6 @@ export const authorize = async (
 
   try {
     const decoded = await jwt.verify(token, "Glorfindel");
-    console.log(decoded);
     req.body.user = decoded;
     next();
   } catch (error) {
