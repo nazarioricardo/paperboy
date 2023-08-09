@@ -9,4 +9,4 @@ router.get("/", (request, response) => {
   });
 });
 
-export { router as viewRouter };
+export { router as viewsRouter };

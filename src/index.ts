@@ -4,9 +4,9 @@ import { json } from "body-parser";
 import cors from "cors";
 import hbs from "hbs";
 import path from "path";
-import { todoRouter } from "./routes/todo";
-import { userRouter } from "./routes/user";
-import { viewRouter } from "./routes/view";
+import { todoRouter } from "./routes/api/todo";
+import { userRouter } from "./routes/api/user";
+import { viewsRouter } from "./routes/views";
 
 const PORT = 8080;
 
@@ -17,7 +17,7 @@ app.set("view engine", "hbs");
 app.set("views", __dirname + "/views");
 app.use(todoRouter);
 app.use(userRouter);
-app.use(viewRouter);
+app.use(viewsRouter);
 
 hbs.registerPartials(path.join(__dirname, "views/partials"));
 
