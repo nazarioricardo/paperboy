@@ -30,6 +30,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validator": "^7.0.1",
+    "gcp-metadata": "^6.0.0",
+    "google-auth-library": "^9.0.0",
     "hbs": "^4.2.0",
     "joi": "^17.9.2",
     "jsonwebtoken": "^9.0.1",

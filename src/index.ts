@@ -8,8 +8,6 @@ import { todoRouter } from "./routes/api/todo";
 import { userRouter } from "./routes/api/user";
 import { viewsRouter } from "./routes/views";
 
-const PORT = 8080;
-
 const app = express();
 app.use(cors());
 app.use(json());
@@ -37,6 +35,7 @@ try {
   console.log(error);
 }
 
+const PORT = 8080;
 app.listen(PORT, () => {
-  console.log("server is listening on port " + PORT);
+  console.log("server is listening on http://localhost:" + PORT);
 });

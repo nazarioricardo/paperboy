@@ -9,4 +9,12 @@ router.get("/", (request, response) => {
   });
 });
 
+router.get("/about", (request, response) => {
+  response.render("about", {
+    subject: "hbs template engine",
+    name: "our template",
+    link: "https://google.com",
+  });
+});
+
 export { router as viewsRouter };
