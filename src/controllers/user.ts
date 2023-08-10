@@ -3,6 +3,7 @@ import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 import User from "../models/user";
 import { IUser, IUserLogin } from "../utils/types";
+import { signToken } from "../utils/signToken";
 
 /**
  * @param {Request} req
@@ -27,13 +28,7 @@ export const login = async (req: Request, res: Response) => {
         return res.status(401).json({ message: "Password is invalid" });
       }
 
-      const token = await jwt.sign(
-        {
-          id: user._id,
-          email,
-        },
-        "Glorfindel"
-      );
+      const token = await signToken(user.id, user.email);
 
       return res.status(200).json({
         token,

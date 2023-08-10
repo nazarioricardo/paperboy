@@ -4,11 +4,9 @@ import { json } from "body-parser";
 import cors from "cors";
 import hbs from "hbs";
 import path from "path";
-import { todoRouter } from "./routes/todo";
-import { userRouter } from "./routes/user";
-import { viewRouter } from "./routes/view";
-
-const PORT = 8080;
+import { todoRouter } from "./routes/api/todo";
+import { userRouter } from "./routes/api/user";
+import { viewsRouter } from "./routes/views";
 
 const app = express();
 app.use(cors());
@@ -17,7 +15,7 @@ app.set("view engine", "hbs");
 app.set("views", __dirname + "/views");
 app.use(todoRouter);
 app.use(userRouter);
-app.use(viewRouter);
+app.use(viewsRouter);
 
 hbs.registerPartials(path.join(__dirname, "views/partials"));
 
@@ -37,6 +35,7 @@ try {
   console.log(error);
 }
 
+const PORT = 8080;
 app.listen(PORT, () => {
-  console.log("server is listening on port " + PORT);
+  console.log("server is listening on http://localhost:" + PORT);
 });
